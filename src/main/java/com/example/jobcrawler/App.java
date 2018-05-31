@@ -24,7 +24,7 @@ import org.jsoup.select.Elements;
 public class App {
 	public static void printHelp(Options options) {
 		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp("cldr <options>", options);
+		formatter.printHelp("jobc <options>", options);
 	}
 
 	public static void main(String[] args) {
@@ -32,13 +32,19 @@ public class App {
 		Options options = new Options();
 		options.addOption("p", "max-page", true, "最大頁數");
 		options.addOption("o", "output-dir", true, "CSV檔輸出路徑");
-		options.addOption("h", "help", true, "印出CLI說明");
+		options.addOption("h", "help", false, "印出CLI說明");
 
 		DefaultParser parser = new DefaultParser();
 
 		try {
 
 			CommandLine cmdLine = parser.parse(options, args);
+
+			if (cmdLine.hasOption('h')) {
+				printHelp(options);
+				System.exit(0);
+				
+			}
 
 			if (!cmdLine.hasOption('p')) {
 				System.out.println("未提供最大頁數");
