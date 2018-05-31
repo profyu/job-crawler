@@ -3,12 +3,7 @@ package com.example.jobcrawler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.NumberFormat;
-import java.util.regex.Pattern;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
@@ -43,7 +38,7 @@ public class App {
 			if (cmdLine.hasOption('h')) {
 				printHelp(options);
 				System.exit(0);
-				
+
 			}
 
 			if (!cmdLine.hasOption('p')) {
@@ -68,6 +63,7 @@ public class App {
 					CSVFormat.EXCEL.withHeader("職務", "雇主", "位置", "標籤", "最低月薪", "最高月薪", "幣別"))) {
 				NumberFormat numberFormat = NumberFormat.getNumberInstance(java.util.Locale.US);
 				for (int i = 1; i <= maxPage; i++) {
+					System.out.println("正在抓取第" + i + "頁...");
 					try {
 						Document doc = Jsoup.connect("https://mit.jobs/jobs?page=" + i).get();
 						Elements jobItems = doc.select("#job-list .job-item");
