@@ -26,7 +26,7 @@ public class App {
 
 		Options options = new Options();
 		options.addOption("p", "max-page", true, "最大頁數");
-		options.addOption("o", "output-dir", true, "CSV檔輸出路徑");
+		options.addOption("o", "output-file", true, "CSV檔輸出路徑");
 		options.addOption("h", "help", false, "印出CLI說明");
 
 		DefaultParser parser = new DefaultParser();
